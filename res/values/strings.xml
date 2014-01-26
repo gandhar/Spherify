@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Spherify</string>
+    <string name="action_doit"></string>
+    <string name="action_about"></string>
+    <string name="title_activity_about">Help/Information</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">
+        \nWorks only with 360 degree panoramas, discards if not a complete panorama.
+        \nSelect both images and then hit the done button in the action bar.
+        \nThe xmp data from the first image is copied to the second image.
+        \nCan be useful if the photosphere xmp was lost after editing.
+        \n</string>
+
+</resources>
