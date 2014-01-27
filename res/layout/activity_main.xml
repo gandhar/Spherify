@@ -2,12 +2,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.02"
-        />
+    android:fitsSystemWindows="true"
+    android:background="#222222">
 	<RelativeLayout
     	android:layout_width="match_parent"
     	android:layout_height="0dp"
@@ -63,8 +59,4 @@
         	android:textColor="#FFFFFF"
         	android:textSize="25sp" />
 	</RelativeLayout>
-	<View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.02"/>
 </LinearLayout>
