@@ -4,6 +4,10 @@
           android:icon="@drawable/ic_action_about"
           android:title="@string/action_about"
           android:showAsAction="always" />
+    <!--  item android:id="@+id/action_flip"
+          android:icon="@drawable/ic_action_copy"
+          android:title="@string/action_flip"
+          android:showAsAction="always" /-->
     <item android:id="@+id/action_doit"
           android:icon="@drawable/ic_action_doit"
           android:title="@string/action_doit"

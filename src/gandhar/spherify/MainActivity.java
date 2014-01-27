@@ -140,6 +140,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         		
         		return true;
         		
+      /*  	case R.id.action_flip:
+        		Intent myIntent1 = new Intent(MainActivity.this, EditActivity.class);
+        		myIntent1.putExtra("key", 16); //Optional parameters
+        		myIntent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+        		myIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        		MainActivity.this.startActivity(myIntent1);
+        		
+        		return true;
+        		*/
         	default:
         		return super.onOptionsItemSelected(item);
     	}
@@ -166,7 +175,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
             Integer cropValue = meta.getPropertyInteger(namespace, cropWidthName);
             Integer fullValue = meta.getPropertyInteger(namespace, fullWidthName);
-            Log.d(TAG, "crop"+cropValue + "full"+ fullValue);
+            Log.d(TAG, "crflipop"+cropValue + "full"+ fullValue);
             // Definition of a 360:
             // GFullPanoWidthPixels == CroppedAreaImageWidthPixels
             if (cropValue != null && fullValue != null) {
