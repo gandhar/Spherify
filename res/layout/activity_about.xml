@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AboutActivity" >
+    tools:context=".AboutActivity"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/textView2"
@@ -15,6 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/hello_world"
-        android:textSize="15sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+    	android:padding="20sp"/>
 
 </RelativeLayout>
