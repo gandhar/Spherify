@@ -17,10 +17,6 @@
         android:theme="@style/AppBaseTheme"
         android:logo="@drawable/logo_icon">
         <activity
-            android:name="gandhar.spherify.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
             android:name="gandhar.spherify.AboutActivity"
             android:label="@string/title_activity_about"
             android:parentActivityName="gandhar.spherify.MainActivity" >
