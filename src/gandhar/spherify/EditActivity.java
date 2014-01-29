@@ -1,11 +1,15 @@
 package gandhar.spherify;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.channels.FileChannel;
+import java.util.Calendar;
 
 import com.adobe.xmp.XMPException;
 import com.adobe.xmp.XMPMeta;
@@ -14,6 +18,7 @@ import com.adobe.xmp.options.SerializeOptions;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +27,7 @@ import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,6 +72,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         TextView textedit2 = (TextView) findViewById(R.id.textView5);
         
         src1=getRealPathFromURI(getBaseContext(),selectedImage);
+        
+        if(src1!=null){
+        	try {
+				createCopy();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
         Bitmap d = BitmapFactory.decodeFile(src1);
         
         Log.d(TAG,src1);
@@ -268,7 +283,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             	    Toast.makeText(getBaseContext(), "done, now go check the gallery", Toast.LENGTH_LONG).show();
         		}
         		else{
-        			Toast.makeText(getBaseContext(), "only works with non photospheres for now", Toast.LENGTH_LONG).show();
+        			
+        			Toast.makeText(getBaseContext(), "Location data was added", Toast.LENGTH_LONG).show();
         		}
         		//}
         		//else
@@ -281,18 +297,53 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         		EditActivity.this.startActivity(myIntent);
         		
         		return true;
+
         		
-       /* 	case R.id.action_flip:
-        		Intent myIntent1 = new Intent(EditActivity.this, MainActivity.class);
-        		myIntent1.putExtra("key", 16); //Optional parameters
-        		myIntent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-        		myIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        		EditActivity.this.startActivity(myIntent1);
-        		
-        		return true;
-        		*/
         	default:
         		return super.onOptionsItemSelected(item);
     	}
     }
+    
+    public void createCopy() throws IOException {
+    	File picFolder = new File (Environment.getExternalStorageDirectory() + "/Pictures");
+    	Log.d(TAG,picFolder.toString());
+    	if(!picFolder.exists()){
+    		boolean success = picFolder.mkdir();
+    		if(success){
+    			Log.d(TAG,"/pictures folder created");
+    		}
+    	}
+    	
+    	File panoFolder = new File (Environment.getExternalStorageDirectory() + "/Pictures/Panos");
+    	Log.d(TAG,picFolder.toString());
+    	if(!panoFolder.exists()){
+    		boolean success = panoFolder.mkdir();
+    		if(success){
+    			Log.d(TAG,"/pictures/panos folder created");
+    		}
+    	}
+    	
+    	FileChannel inChannel = new FileInputStream(src1).getChannel();
+    	File tmp = new File(src1);
+    	FileChannel outChannel =null;
+        File tmp1=new File(Environment.getExternalStorageDirectory().toString() + "/Pictures/Panos/"+tmp.getName());
+        Time now = new Time();
+        now.setToNow();
+        String timenow = ""+ now.year+now.month+now.monthDay+now.hour+now.minute+now.second;
+        
+        outChannel = new FileOutputStream(Environment.getExternalStorageDirectory().toString() + "/Pictures/Panos/"+tmp.getName().substring(0, tmp.getName().lastIndexOf('.'))+ timenow + ".jpg").getChannel();
+        src1=Environment.getExternalStorageDirectory().toString() + "/Pictures/Panos/"+tmp.getName().substring(0, tmp.getName().lastIndexOf('.'))+ timenow + ".jpg";
+        Log.d(TAG,src1);
+        
+        try {
+           inChannel.transferTo(0, inChannel.size(), outChannel);
+        } finally {
+           if (inChannel != null)
+              inChannel.close();
+           if (outChannel != null)
+              outChannel.close();
+        }
+        
+    }
+    
 }

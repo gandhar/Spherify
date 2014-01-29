@@ -19,7 +19,7 @@
         <activity
             android:name="gandhar.spherify.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName="gandhar.spherify.MainActivity" >
+            android:parentActivityName="gandhar.spherify.EditActivity" >
         </activity>
         <activity
             android:name="gandhar.spherify.EditActivity"
