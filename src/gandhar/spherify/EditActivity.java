@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -286,6 +287,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 
 
+	@SuppressLint("UseValueOf")
 	private Float convertToDegree(String stringDMS){
 		Float result = null;
 		String[] DMS = stringDMS.split(",", 3);
@@ -358,7 +360,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         	
         	case R.id.action_about:
         		Intent myIntent = new Intent(EditActivity.this, AboutActivity.class);
-        		myIntent.putExtra("key", 15); //Optional parameters
+        		myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         		EditActivity.this.startActivity(myIntent);
         		
         		return true;
@@ -369,7 +371,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	}
     }
     
-    public void createCopy() throws IOException {
+    
+    @SuppressWarnings("resource")
+	public void createCopy() throws IOException {
     	File picFolder = new File (Environment.getExternalStorageDirectory() + "/Pictures");
     	Log.d(TAG,picFolder.toString());
     	if(!picFolder.exists()){
@@ -389,9 +393,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	}
     	
     	FileChannel inChannel = new FileInputStream(src1).getChannel();
-    	File tmp = new File(src1);
     	FileChannel outChannel =null;
-        File tmp1=new File(Environment.getExternalStorageDirectory().toString() + "/Pictures/Panos/"+tmp.getName());
+    	
+    	
+    	File tmp = new File(src1);
         Time now = new Time();
         now.setToNow();
         String timenow = ""+ now.year+now.month+now.monthDay+now.hour+now.minute+now.second;
