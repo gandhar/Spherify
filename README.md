@@ -1,4 +1,7 @@
 Spherify
 ========
 
-adds photosphere metadata from good photosphere to edited photo
+offline alternative to photo-sphere.appspot
+
+todo:
+geotag
