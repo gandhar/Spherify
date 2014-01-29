@@ -16,6 +16,7 @@ import com.adobe.xmp.XMPMeta;
 import com.adobe.xmp.XMPMetaFactory;
 import com.adobe.xmp.options.SerializeOptions;
 
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,6 +42,7 @@ public class EditActivity extends Activity {
 public static String TAG= "spherify";
 private static final int RESULT_LOAD_IMAGE= 102;
 public String src1=null;
+public Float Latitude=null, Longitude=null;
 public XMPMeta fakemeta=null;
 
     @Override
@@ -70,6 +72,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         TextView textView = (TextView) findViewById(R.id.textView1);
         TextView textedit1 = (TextView) findViewById(R.id.textView4);
         TextView textedit2 = (TextView) findViewById(R.id.textView5);
+        TextView textedit3 = (TextView) findViewById(R.id.textView6); //location one
         
         src1=getRealPathFromURI(getBaseContext(),selectedImage);
         
@@ -220,16 +223,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         	}
         	
         	Log.d(TAG,"width"+cropWidthValue+"	"+fullWidthValue+"	height"+cropHeightValue+"	"+fullHeightValue);
+        	textView.setText("Contains Valid Metadata");
         	
-        	if (cropWidthValue != null && fullWidthValue != null && Math.abs(fullWidthValue-cropWidthValue)<5) {
-        		textView.setText("Already a 360 degree image");
+        	if (cropWidthValue != null && fullWidthValue != null && Math.abs(fullWidthValue-cropWidthValue)<5) {        		
         		textedit1.setText(""+360.0);
         		textedit2.setText(""+(float) (180.0*cropWidthValue/fullWidthValue));
         		
         	}
         	
-        	else{
-        		textView.setText("Contains Valid Metadata");
+        	else{        		
         		textedit1.setText(""+(float) (360.0*cropWidthValue/fullWidthValue));
             	textedit2.setText(""+(float) (180.0*cropHeightValue/fullHeightValue));
         	}
@@ -239,12 +241,75 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
     	imageView.setImageBitmap(scaled);
     	
-    }
-
- 
- 
+    	
+    	//xmp shit done, now for the location 
+        
+        
+        try {
+    		ExifInterface exif = new ExifInterface(src1);
+    		String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+    		String longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
+    		String latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
+    		String longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
+    		 
+    		if(latitude!=null && longitude!=null && latitude_ref!=null && longitude_ref!=null ){
+    			Log.d(TAG,"lat	"+latitude+"latref	"+latitude_ref+"long	"+longitude+"longref	"+longitude_ref);
+    			if(latitude_ref.equals("N")){
+    				   Latitude = convertToDegree(latitude);
+    				  }
+    				  else{
+    				   Latitude = 0 - convertToDegree(latitude);
+    				  }
+    				 
+    				  if(longitude_ref.equals("E")){
+    				   Longitude = convertToDegree(longitude);
+    				  }
+    				  else{
+    				   Longitude = 0 - convertToDegree(longitude);
+    				  }
+    				  
+    			Log.d(TAG,"latitude" + Latitude+ "longitude"+Longitude);
+    			textedit3.setText(""+Latitude+"\n"+Longitude);
+    		}
+    		
+    		else{
+    			textedit3.setText("no geotag");
+    			Log.d(TAG,"no location data");
+    		}
+    		
+    		
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}	
+    }   
 }
 
+
+	private Float convertToDegree(String stringDMS){
+		Float result = null;
+		String[] DMS = stringDMS.split(",", 3);
+		
+		String[] stringD = DMS[0].split("/", 2);
+	    	Double D0 = new Double(stringD[0]);
+	    	Double D1 = new Double(stringD[1]);
+	    	Double FloatD = D0/D1;
+	    	
+	    	String[] stringM = DMS[1].split("/", 2);
+	    	Double M0 = new Double(stringM[0]);
+	    	Double M1 = new Double(stringM[1]);
+	    	Double FloatM = M0/M1;
+	    	
+	    	String[] stringS = DMS[2].split("/", 2);
+	    	Double S0 = new Double(stringS[0]);
+	    	Double S1 = new Double(stringS[1]);
+	    	Double FloatS = S0/S1;
+	  
+	    	result = new Float(FloatD + (FloatM/60) + (FloatS/3600));
+	  
+	    	return result;
+		};
+	
 
     public String getRealPathFromURI(Context context, Uri contentUri) {
     	  Cursor cursor = null;
