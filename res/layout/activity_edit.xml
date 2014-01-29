@@ -48,6 +48,7 @@
 	        android:minLines="2"
 	        android:text="Horizontal Field of View"
 	        android:textColor="#FFFFFF"
+        	android:gravity="center"
 	        android:textSize="16sp" />
 
 	    <TextView
@@ -55,10 +56,11 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/textView2"
+	        android:layout_alignRight="@+id/textView2"
 	        android:layout_below="@+id/textView2"
-	        android:layout_marginLeft="22dp"
 	        android:text="TBD"
 	        android:textColor="#FFFFFF"
+        	android:gravity="center"
 	        android:textSize="30sp" />
 
 	    <TextView
@@ -66,10 +68,12 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/textView4"
+	        android:layout_alignRight="@+id/textView3"
 	        android:layout_below="@+id/textView3"
 	        android:layout_marginTop="22dp"
 	        android:text="TBD"
 	        android:textColor="#FFFFFF"
+        	android:gravity="center"
 	        android:textSize="30sp" />
 
 	    <TextView
@@ -77,11 +81,13 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/textView2"
+	        android:layout_alignRight="@+id/textView2"
 	        android:layout_below="@+id/textView4"
 	        android:layout_marginTop="42dp"
 	        android:minLines="2"
 	        android:text="Vertical Field of View"
 	        android:textColor="#FFFFFF"
+        	android:gravity="center"
 	        android:textSize="16sp" />
 
 	    <RelativeLayout

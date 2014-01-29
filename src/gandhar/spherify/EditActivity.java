@@ -70,6 +70,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
     	Uri selectedImage = data.getData();
         ImageView imageView = (ImageView) findViewById(R.id.imageView11);
+        ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
         TextView textView = (TextView) findViewById(R.id.textView1);
         TextView textedit1 = (TextView) findViewById(R.id.textView4);
         TextView textedit2 = (TextView) findViewById(R.id.textView5);
@@ -274,6 +275,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     		}
     		
     		else{
+    			imageView1.setImageResource(R.drawable.map_no);
     			textedit3.setText("no geotag");
     			Log.d(TAG,"no location data");
     		}
