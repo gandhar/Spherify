@@ -8,10 +8,10 @@
     <string name="title_activity_about">Help/Information</string>
     <string name="title_activity_edit">Spherify</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">\nOffline alternative to photo-sphere.appspot.
-        \nDetects if already a photosphere, to allow adding of location data(soon).
-        \nThe best values are selected by default.
-        \nPhotosphere xmp data is added to the image.
+    <string name="hello_world">Spherify\n
+        \nAn offline alternative to photo-sphere.appspot
+        \nPhotosphere xmp data is added to the image, along with location
+        \nThe complete source code can be found at https://github.com/gandhar/Spherify
         </string>
 
 </resources>
