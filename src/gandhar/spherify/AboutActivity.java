@@ -2,6 +2,7 @@ package gandhar.spherify;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 public class AboutActivity extends Activity {

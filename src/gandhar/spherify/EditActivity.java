@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
-import java.util.Calendar;
 
 import com.adobe.xmp.XMPException;
 import com.adobe.xmp.XMPMeta;
@@ -45,6 +44,7 @@ private static final int RESULT_LOAD_IMAGE= 102;
 public String src1=null;
 public Float Latitude=null, Longitude=null;
 public XMPMeta fakemeta=null;
+public String locationdata=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +78,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         
         src1=getRealPathFromURI(getBaseContext(),selectedImage);
         
-        if(src1!=null){
-        	try {
-				createCopy();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }
+        
         Bitmap d = BitmapFactory.decodeFile(src1);
         
         Log.d(TAG,src1);
@@ -344,20 +337,38 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	// Handle presses on the action bar items
     	switch (item.getItemId()) {
         	case R.id.action_doit:
-        		//if(src1!=null||dest1!=null){
-        			//XMPMeta xmpmeta = null;
-            	    //xmpmeta= XmpUtil.extractXMPMeta(src1);
-        		if(fakemeta!=null){
-            	    XmpUtil.writeXMPMeta(src1,fakemeta);
-            	    Toast.makeText(getBaseContext(), "done, now go check the gallery", Toast.LENGTH_LONG).show();
-        		}
+        		
+        		if(src1!=null){
+                	try {
+                		if(fakemeta!=null||locationdata!=null)
+    					createCopy();
+                		
+        				if(fakemeta!=null){
+                    	    XmpUtil.writeXMPMeta(src1,fakemeta);
+                    	    Toast.makeText(getBaseContext(), "xmp data added", Toast.LENGTH_SHORT).show();
+                		}
+        				else{
+        					Toast.makeText(getBaseContext(), "no xmp to be added", Toast.LENGTH_SHORT).show();
+        				}
+        				
+        				if(locationdata!=null){
+        					Log.d(TAG,"location data add here");
+        					Toast.makeText(getBaseContext(), "image geotagged", Toast.LENGTH_LONG).show();
+                		}
+        				else{
+        					Toast.makeText(getBaseContext(), "no geotag to be added", Toast.LENGTH_LONG).show();
+        				}
+        				
+        			} catch (IOException e) {
+        				// TODO Auto-generated catch block
+        				e.printStackTrace();
+        			}
+                }
         		else{
-        			
-        			Toast.makeText(getBaseContext(), "Location data was added", Toast.LENGTH_LONG).show();
+        			Toast.makeText(getBaseContext(), "No image selected", Toast.LENGTH_LONG).show();
         		}
-        		//}
-        		//else
-        			//Toast.makeText(getBaseContext(), "please select both images", Toast.LENGTH_LONG).show();
+        		
+        		
         		return true;
         	
         	case R.id.action_about:
