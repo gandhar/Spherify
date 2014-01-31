@@ -264,6 +264,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     				  }
     				  
     			Log.d(TAG,"latitude" + Latitude+ "longitude"+Longitude);
+    			imageView1.setImageResource(R.drawable.map);
     			textedit3.setText(""+Latitude+"\n"+Longitude);
     		}
     		
