@@ -125,7 +125,8 @@
 	        android:layout_alignRight="@+id/imageView1"
         	android:gravity="center"
         	android:textColor="#FFFFFF"
-        	android:background="#25252525"/>
+        	android:background="#25252525"
+        	android:text="TBD"/>
    	
 	</RelativeLayout>
 

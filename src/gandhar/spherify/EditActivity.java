@@ -246,7 +246,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     		String longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
     		String latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
     		String longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
-    		 
+    		
     		if(latitude!=null && longitude!=null && latitude_ref!=null && longitude_ref!=null ){
     			Log.d(TAG,"lat	"+latitude+"latref	"+latitude_ref+"long	"+longitude+"longref	"+longitude_ref);
     			if(latitude_ref.equals("N")){
@@ -372,6 +372,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         		
         		return true;
         	
+
         	case R.id.action_about:
         		Intent myIntent = new Intent(EditActivity.this, AboutActivity.class);
         		myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -426,8 +427,6 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
               inChannel.close();
            if (outChannel != null)
               outChannel.close();
-        }
-        
+        }        
     }
-    
 }
