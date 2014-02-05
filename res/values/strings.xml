@@ -8,7 +8,7 @@
     <string name="action_about">Info</string>
     <string name="action_flip">Switch</string>
     <string name="title_activity_about">Help/Information</string>
-    <string name="title_activity_map">Pick a Location</string>
+    <string name="title_activity_map">Drag the marker</string>
     <string name="title_activity_edit">Spherify</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">An offline alternative to photo-sphere.appspot

@@ -454,4 +454,21 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
               outChannel.close();
         }        
     }
+    
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        Log.d(TAG,"resume");
+        ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
+        TextView textedit3 = (TextView) findViewById(R.id.textView6); //location one
+        
+        
+        if(locationdata!=null){
+        	imageView1.setImageResource(R.drawable.map);
+			textedit3.setText(""+(float)locationdata.latitude+"\n"+(float)locationdata.longitude);
+        }
+        	
+    }
+    
+    
 }
