@@ -28,7 +28,8 @@ public Marker goa;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
         Bundle extras = getIntent().getExtras();
         boolean message = extras.getBoolean("containsdata");
         Log.d(TAG,""+message);
@@ -77,8 +78,14 @@ public Marker goa;
     	
     		case R.id.action_done:
     			Log.d(TAG,""+goa.getPosition());
-    	    	
-    		return true;
+    			EditActivity.locationdata = goa.getPosition();
+    			onBackPressed();
+    	    	return true;
+
+    	    case android.R.id.home:
+    	    	onBackPressed();
+    	        return true;
+    	        
 
         	case R.id.action_switch:
         		                

@@ -14,6 +14,7 @@ import com.adobe.xmp.XMPException;
 import com.adobe.xmp.XMPMeta;
 import com.adobe.xmp.XMPMetaFactory;
 import com.adobe.xmp.options.SerializeOptions;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -44,9 +45,9 @@ private static final int RESULT_LOAD_IMAGE= 102;
 public String src1=null;
 public Float Latitude=null, Longitude=null;
 public XMPMeta fakemeta=null;
-public String locationdata=null;
 public Boolean containsdata = false;
 public int containsdata_lat, containsdata_long;
+public static LatLng locationdata  =null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,6 @@ public int containsdata_lat, containsdata_long;
    			   		myIntent.putExtra("long",Longitude);
    			   }
    			   
-   			   myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
    			   EditActivity.this.startActivity(myIntent);
    		   }
    	   }        
@@ -378,7 +378,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         				}
         				
         				if(locationdata!=null){
-        					Log.d(TAG,"location data add here");
+        					Log.d(TAG,"location data add here"+locationdata);
         					Toast.makeText(getBaseContext(), "image geotagged", Toast.LENGTH_LONG).show();
                 		}
         				else{
