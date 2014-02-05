@@ -40,12 +40,10 @@ public Marker goa;
         }
         else{
         	double gps[] = getGPS();
-            try {
+            if(gps[0]!=0&&gps[1]!=0)
 				mark1 = new LatLng(gps[0], gps[1]);
-            } catch (NullPointerException e) {
-            	//#paris
-               	mark1 = new LatLng(48.8567, 2.3508);
-            }
+            else
+            	mark1 = new LatLng(48.8567, 2.3508); //paris
         }
 
         
