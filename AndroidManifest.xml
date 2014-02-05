@@ -3,9 +3,18 @@
     package="gandhar.spherify"
     android:versionCode="1"
     android:versionName="1.0" >
-
+	
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+        
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="19" />
@@ -16,11 +25,26 @@
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme"
         android:logo="@drawable/logo_icon">
+        <meta-data
+    		android:name="com.google.android.gms.version"
+    		android:value="@integer/google_play_services_version" />        
+        <meta-data
+    		android:name="com.google.android.maps.v2.API_KEY"
+    		android:value="AIzaSyAmSDLJPWO0aN0BU91k4hbhiU59Z8NzmwQ"/>
+        
+		
         <activity
             android:name="gandhar.spherify.AboutActivity"
             android:label="@string/title_activity_about"
             android:parentActivityName="gandhar.spherify.EditActivity" >
         </activity>
+        
+        <activity
+            android:name="gandhar.spherify.MapActivity"
+            android:label="@string/title_activity_map"
+            android:parentActivityName="gandhar.spherify.EditActivity" >            
+        </activity>
+        
         <activity
             android:name="gandhar.spherify.EditActivity"
             android:label="@string/title_activity_edit"

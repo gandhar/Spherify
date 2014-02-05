@@ -45,12 +45,36 @@ public String src1=null;
 public Float Latitude=null, Longitude=null;
 public XMPMeta fakemeta=null;
 public String locationdata=null;
+public Boolean containsdata = false;
+public int containsdata_lat, containsdata_long;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_edit);
     ImageView imageView = (ImageView) findViewById(R.id.imageView11);
+    ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
+    
+    imageView1.setOnClickListener(new View.OnClickListener(){
+    	//@Override
+   	   public void onClick(View v) {
+   		   if(src1==null){
+   			   Toast.makeText(getBaseContext(), "no image selected", Toast.LENGTH_SHORT).show();
+   		   }
+   		   else{
+   			   Intent myIntent = new Intent(EditActivity.this, MapActivity.class);
+   			   myIntent.putExtra("containsdata", containsdata);
+   			   
+   			   if(containsdata){
+   				   	myIntent.putExtra("lat", Latitude);
+   			   		myIntent.putExtra("long",Longitude);
+   			   }
+   			   
+   			   myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+   			   EditActivity.this.startActivity(myIntent);
+   		   }
+   	   }        
+    });
     
 	
     imageView.setOnClickListener(new View.OnClickListener(){
@@ -249,6 +273,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     		
     		if(latitude!=null && longitude!=null && latitude_ref!=null && longitude_ref!=null ){
     			Log.d(TAG,"lat	"+latitude+"latref	"+latitude_ref+"long	"+longitude+"longref	"+longitude_ref);
+    			containsdata = true;
     			if(latitude_ref.equals("N")){
     				   Latitude = convertToDegree(latitude);
     				  }
