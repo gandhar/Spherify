@@ -8,6 +8,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +35,11 @@ public Marker goa;
         setContentView(R.layout.activity_map);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
+
+	    SystemBarTintManager tintManager = new SystemBarTintManager(this);
+	    tintManager.setStatusBarTintEnabled(true);
+	    tintManager.setNavigationBarTintEnabled(true);
+	    tintManager.setTintColor(Color.parseColor("#80000000"));
 		
 		
         Bundle extras = getIntent().getExtras();
