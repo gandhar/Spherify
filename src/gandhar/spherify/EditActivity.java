@@ -76,7 +76,6 @@ public static LatLng locationdata  =null;
    	   }        
     });
     
-	
     imageView.setOnClickListener(new View.OnClickListener(){
     	//@Override
    	   public void onClick(View v) {
@@ -379,6 +378,13 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         				
         				if(locationdata!=null){
         					Log.d(TAG,"location data add here"+locationdata);
+        					ExifInterface exif = new ExifInterface(src1);
+        					exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE,decimalToDMS(locationdata.latitude));
+        		    		exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE,decimalToDMS(locationdata.longitude));
+        		    		exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE_REF,(locationdata.latitude>0)? "N" : "S");
+        		    		exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF,(locationdata.latitude>0)? "E" : "W");
+        		    		exif.saveAttributes();
+        		    		
         					Toast.makeText(getBaseContext(), "image geotagged", Toast.LENGTH_LONG).show();
                 		}
         				else{
@@ -463,12 +469,35 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         TextView textedit3 = (TextView) findViewById(R.id.textView6); //location one
         
         
-        if(locationdata!=null){
+        if(src1!=null && locationdata!=null){
         	imageView1.setImageResource(R.drawable.map);
 			textedit3.setText(""+(float)locationdata.latitude+"\n"+(float)locationdata.longitude);
         }
         	
     }
+
+    String decimalToDMS(double coord) {
+    	String output, degrees, minutes, seconds;
+    	double mod = coord % 1;
+    	int intPart = (int)coord;
+    	degrees = String.valueOf(intPart);
+    	coord = mod * 60;
+    	mod = coord % 1;
+    	intPart = (int)coord;
+            if (intPart < 0) {
+               intPart *= -1;
+            }
+    	minutes = String.valueOf(intPart);
+    	coord = mod * 60;
+    	intPart = (int)coord;
+            if (intPart < 0) {
+               intPart *= -1;
+            }
+    	seconds = String.valueOf(intPart);
+    	output = degrees + "/1," + minutes + "/1," + seconds + "/1";
+    	return output;
+    }
+    
     
     
 }

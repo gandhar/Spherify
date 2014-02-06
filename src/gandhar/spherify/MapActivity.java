@@ -11,6 +11,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 
 public class MapActivity extends Activity {
 
@@ -29,6 +32,9 @@ public Marker goa;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
+		
 		
         Bundle extras = getIntent().getExtras();
         boolean message = extras.getBoolean("containsdata");
