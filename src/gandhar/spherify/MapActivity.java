@@ -30,9 +30,9 @@ public Marker goa;
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.activity_map);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
 		
 		
