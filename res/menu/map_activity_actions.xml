@@ -12,4 +12,8 @@
           android:icon="@drawable/ic_action_doit"
           android:title="@string/action_done"
           android:showAsAction="always" />
+    <item android:id="@+id/action_locate"
+          android:icon="@drawable/ic_action_locate"
+          android:title="@string/action_locate"
+          android:showAsAction="always" />
 </menu>

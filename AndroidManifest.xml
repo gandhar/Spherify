@@ -41,7 +41,8 @@
         <activity
             android:name="gandhar.spherify.MapActivity"
             android:label="@string/title_activity_map"
-            android:parentActivityName="gandhar.spherify.EditActivity" >            
+            android:parentActivityName="gandhar.spherify.EditActivity"
+        	android:uiOptions="splitActionBarWhenNarrow">            
         </activity>
         
         <activity

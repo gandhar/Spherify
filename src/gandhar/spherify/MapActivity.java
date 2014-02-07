@@ -35,7 +35,8 @@ public Marker goa;
         setContentView(R.layout.activity_map);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
-
+		getActionBar().setSplitBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
+		
 	    SystemBarTintManager tintManager = new SystemBarTintManager(this);
 	    tintManager.setStatusBarTintEnabled(true);
 	    tintManager.setNavigationBarTintEnabled(true);
@@ -61,11 +62,11 @@ public Marker goa;
         
         
         GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        
+        map.getUiSettings().setZoomControlsEnabled(false);
         goa = map.addMarker(new MarkerOptions()
                                   .position(mark1)
                                   .draggable(true));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 15));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 4));
       
     }
 
