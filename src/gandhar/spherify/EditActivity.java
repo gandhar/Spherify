@@ -29,6 +29,7 @@ import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
@@ -252,8 +253,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         	}
         }
        
-    	int nh = (int) ( d.getHeight() * (512.0/ d.getWidth()));
-    	Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
+    	Bitmap scaled = getResizedBitmap(d, imageView.getHeight());
     	imageView.setImageBitmap(scaled);
     	
     	
@@ -375,7 +375,20 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	}
     }
     
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleHeight = ((float) newHeight) / height;
+        int newWidth = (int) (width*scaleHeight);
+        float scaleWidth = ((float) newWidth) / width;
 
+        
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        return resizedBitmap;
+    }
+    
 	@SuppressLint("UseValueOf")
 	private Float convertToDegree(String stringDMS){
 		Float result = null;
