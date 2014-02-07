@@ -367,6 +367,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 	try {
                 		if(fakemeta!=null||locationdata!=null)
     					createCopy();
+                		Intent scannerintent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                		scannerintent.setData(Uri.fromFile(new File(src1)));
+                		sendBroadcast(scannerintent);
                 		
         				if(fakemeta!=null){
                     	    XmpUtil.writeXMPMeta(src1,fakemeta);

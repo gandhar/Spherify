@@ -31,7 +31,6 @@
         <meta-data
     		android:name="com.google.android.maps.v2.API_KEY"
     		android:value="AIzaSyAmSDLJPWO0aN0BU91k4hbhiU59Z8NzmwQ"/>
-        
 		
         <activity
             android:name="gandhar.spherify.AboutActivity"
@@ -47,11 +46,9 @@
         
         <activity
             android:name="gandhar.spherify.EditActivity"
-            android:label="@string/title_activity_edit"
-            >
+            android:label="@string/title_activity_edit">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
