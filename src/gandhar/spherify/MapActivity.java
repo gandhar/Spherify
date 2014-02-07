@@ -35,7 +35,6 @@ public Marker goa;
         setContentView(R.layout.activity_map);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
-		getActionBar().setSplitBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
 		
 	    SystemBarTintManager tintManager = new SystemBarTintManager(this);
 	    tintManager.setStatusBarTintEnabled(true);
@@ -106,15 +105,13 @@ public Marker goa;
         	        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         		return true;
 
-        		
         	default:
         		return super.onOptionsItemSelected(item);
     	}
     }
     
     private double[] getGPS() {
-    	 LocationManager lm = (LocationManager) getSystemService(
-    	  Context.LOCATION_SERVICE);
+    	 LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     	 List<String> providers = lm.getProviders(true);
 
     	 Location l = null;
