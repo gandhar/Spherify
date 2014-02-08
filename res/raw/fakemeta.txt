@@ -15,15 +15,4 @@
     </rdf:Description>
   </rdf:RDF>
 </x:xmpmeta>
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
-             
 <?xpacket end="w"?>

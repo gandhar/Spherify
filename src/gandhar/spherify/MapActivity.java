@@ -1,5 +1,8 @@
 package gandhar.spherify;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import au.com.bytecode.opencsv.CSVReader;
 
 public class MapActivity extends Activity {
 
@@ -51,8 +55,9 @@ public Marker goa;
         	Log.d(TAG, "lat"+extras.getFloat("lat")+"long"+extras.getFloat("long"));
         }
         else{
-        	double gps[] = getGPS();
-            if(gps[0]!=0&&gps[1]!=0)
+        	double gps[] = {0,0};
+        	gps = getGPS();
+			if(gps[0]!=0&&gps[1]!=0)
 				mark1 = new LatLng(gps[0], gps[1]);
             else
             	mark1 = new LatLng(48.8567, 2.3508); //paris
@@ -65,7 +70,7 @@ public Marker goa;
         goa = map.addMarker(new MarkerOptions()
                                   .position(mark1)
                                   .draggable(true));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 4));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 5));
       
     }
 
@@ -113,18 +118,36 @@ public Marker goa;
     private double[] getGPS() {
     	 LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     	 List<String> providers = lm.getProviders(true);
-
+    	 
     	 Location l = null;
-
-    	 for (int i=providers.size()-1; i>=0; i--) {
-    	  l = lm.getLastKnownLocation(providers.get(i));
-    	  if (l != null) break;
+    	 for(String provider : providers){
+    		 l = lm.getLastKnownLocation(provider);
+    		 if(l!=null)
+    			 break;
     	 }
-
     	 double[] gps = new double[2];
     	 if (l != null) {
     	  gps[0] = l.getLatitude();
     	  gps[1] = l.getLongitude();
+    	 }
+    	 else{
+    		 InputStream csvStream = getBaseContext().getResources().openRawResource(R.raw.country_latlon);
+    		 InputStreamReader csvStreamReader = new InputStreamReader(csvStream);
+    		 CSVReader csvReader = new CSVReader(csvStreamReader);
+    		 String [] nextLine;
+    		 try {
+    			 String currentCountry = getBaseContext().getResources().getConfiguration().locale.getCountry();
+    			 while ((nextLine = csvReader.readNext()) != null) {
+    				if(nextLine[0].equals(currentCountry)){
+    					gps[0]=Double.valueOf(nextLine[1]);
+    					gps[1]=Double.valueOf(nextLine[2]);
+    					break;
+    				}
+				 }
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	 }
 
     	 return gps;
