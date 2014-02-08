@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Spherify</string>
     <string name="action_done">Done</string>
     <string name="action_doit">DO it</string>
@@ -15,9 +14,10 @@
         \nPhotosphere xmp data is added to the image, along with location
         \nThe complete source code can be found at
         \nhttps://github.com/gandhar/Spherify
-        \n \n
+        \n \n \n
         \nLibraries used:
-        \nxmpcore \nhttp://www.adobe.com/devnet/xmp.html
-        \nAndroid Support Library \nhttp://developer.android.com/tools/support-library/
+        \n \nxmpcore \nhttp://www.adobe.com/devnet/xmp.html
+        \n\nopencsv \nhttp://opencsv.sourceforge.net/
+        \n\nGoogle Maps Android API v2\nhttps://developers.google.com/maps/documentation/android/
         </string>
 </resources>
