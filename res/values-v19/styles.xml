@@ -5,6 +5,7 @@
     <item name="android:windowTranslucentNavigation">false</item>
     <item name="android:windowTranslucentStatus">true</item>
     <item name="android:windowContentOverlay">@null</item>
+    <item name="android:background">#222222</item>
 </style>
 
 <style name="TranslucentActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
